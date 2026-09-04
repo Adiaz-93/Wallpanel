@@ -3,68 +3,219 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1020" />
-  <title>Desk Dashboard</title>
+  <meta name="theme-color" content="#0b1220" />
+  <title>Desk Dashboard V2</title>
   <style>
     :root{
-      --bg:#0b1020;
-      --panel:#121a2b;
-      --panel2:#182238;
-      --text:#f4f7fb;
-      --muted:#a9b4c7;
-      --line:#26324b;
-      --accent:#7cb5ff;
-      --good:#7ee2a8;
-      --warn:#ffd37c;
-      --shadow:0 10px 30px rgba(0,0,0,.22);
+      --bg:#0b1220;
+      --panel:#111a2b;
+      --panel2:#152137;
+      --text:#f6f8fb;
+      --muted:#a9b5c8;
+      --line:rgba(255,255,255,.09);
+      --accent:#8ac2ff;
+      --accent2:#7ce0b2;
+      --shadow:0 14px 36px rgba(0,0,0,.22);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+    html,body{margin:0;height:100%;background:
+      radial-gradient(circle at 15% 10%, rgba(69,107,164,.18), transparent 28%),
+      linear-gradient(180deg,#0a1120,#0c1424 60%,#0a1220);
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
     body{overflow:hidden}
-    .wrap{height:100vh;padding:24px;display:grid;grid-template-columns:1.15fr .85fr;grid-template-rows:auto 1fr;gap:18px}
-    .top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-start}
-    .time{font-size:74px;line-height:.95;font-weight:750;letter-spacing:-2px}
-    .date{font-size:24px;color:var(--muted);margin-top:10px}
+    .wrap{
+      height:100vh;
+      padding:20px 22px;
+      display:grid;
+      grid-template-columns:1.14fr .86fr;
+      grid-template-rows:auto 1fr;
+      gap:14px;
+    }
+    .top{
+      grid-column:1/-1;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      padding:2px 4px 6px;
+    }
+    .time{
+      font-size:68px;
+      line-height:.95;
+      font-weight:800;
+      letter-spacing:-2px
+    }
+    .date{
+      font-size:22px;
+      color:var(--muted);
+      margin-top:8px
+    }
     .weather-now{text-align:right}
-    .temp{font-size:56px;font-weight:750;line-height:1}
-    .cond{font-size:21px;margin-top:8px}
-    .place{font-size:16px;color:var(--muted);margin-top:5px}
-    .left,.right{display:grid;gap:18px;min-height:0}
-    .left{grid-template-rows:1.05fr .95fr}
-    .right{grid-template-rows:1fr 1fr}
-    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);min-height:0;overflow:hidden}
-    .card h2{font-size:17px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 14px}
-    .today-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;height:calc(100% - 34px)}
-    .daybox{border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:center}
-    .dayname{font-size:15px;color:var(--muted)}
-    .icon{font-size:32px;margin:7px 0}
-    .temps{font-size:20px;font-weight:650}
-    .low{color:var(--muted);font-weight:500}
-    .detail{font-size:14px;color:var(--muted);margin-top:5px}
-    .agenda{display:grid;gap:10px}
-    .item{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+    .temp{
+      font-size:54px;
+      font-weight:800;
+      line-height:1
+    }
+    .cond{
+      font-size:20px;
+      margin-top:6px
+    }
+    .place{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:4px
+    }
+
+    .left,.right{
+      display:grid;
+      gap:14px;
+      min-height:0;
+    }
+    .left{grid-template-rows:.92fr 1.08fr}
+    .right{grid-template-rows:1.08fr .92fr}
+
+    .card{
+      background:linear-gradient(180deg,rgba(17,26,43,.96),rgba(21,33,55,.96));
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+      box-shadow:var(--shadow);
+      min-height:0;
+      overflow:hidden;
+      backdrop-filter:blur(4px)
+    }
+    .card h2{
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:.11em;
+      color:var(--muted);
+      margin:0 0 12px
+    }
+
+    .forecast-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      height:calc(100% - 28px);
+    }
+    .daybox{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:15px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .dayname{font-size:14px;color:var(--muted)}
+    .icon{font-size:30px;margin:5px 0 2px}
+    .temps{font-size:19px;font-weight:750}
+    .low{color:var(--muted);font-weight:550}
+    .detail{font-size:13px;color:var(--muted);margin-top:4px}
+
+    .agenda{display:grid;gap:0}
+    .item{
+      display:grid;
+      grid-template-columns:86px 1fr;
+      gap:12px;
+      align-items:center;
+      padding:11px 0;
+      border-bottom:1px solid var(--line)
+    }
     .item:last-child{border-bottom:none}
-    .when{font-weight:650;color:var(--accent)}
-    .what{font-size:18px}
-    .sub{font-size:14px;color:var(--muted);margin-top:2px}
-    .todo{display:grid;gap:10px}
-    .task{display:flex;gap:12px;align-items:center;font-size:18px;padding:9px 0;border-bottom:1px solid var(--line)}
+    .when{font-weight:750;color:var(--accent)}
+    .what{font-size:17px;font-weight:650}
+    .sub{font-size:13px;color:var(--muted);margin-top:2px}
+
+    .todo{display:grid;gap:0}
+    .task{
+      display:flex;
+      gap:11px;
+      align-items:center;
+      font-size:17px;
+      padding:11px 0;
+      border-bottom:1px solid var(--line)
+    }
     .task:last-child{border-bottom:none}
-    .box{width:20px;height:20px;border:2px solid var(--muted);border-radius:5px;flex:0 0 20px}
-    .status{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .statusbox{border:1px solid var(--line);border-radius:15px;padding:14px}
-    .statuslabel{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-    .statusvalue{font-size:22px;font-weight:700;margin-top:5px}
-    .small{font-size:13px;color:var(--muted);margin-top:8px}
-    .error{color:#ff9b9b}
+    .box{
+      width:19px;
+      height:19px;
+      border:2px solid var(--muted);
+      border-radius:5px;
+      flex:0 0 19px
+    }
+
+    .upnext{
+      display:flex;
+      flex-direction:column;
+      height:calc(100% - 28px);
+      justify-content:space-between
+    }
+    .next-main{
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.025)
+    }
+    .eyebrow{
+      font-size:12px;
+      color:var(--accent2);
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      font-weight:800
+    }
+    .next-title{
+      font-size:26px;
+      line-height:1.1;
+      font-weight:800;
+      margin-top:7px
+    }
+    .next-meta{
+      margin-top:8px;
+      font-size:15px;
+      color:var(--muted)
+    }
+    .countdown{
+      margin-top:12px;
+      font-size:38px;
+      font-weight:850;
+      color:var(--accent)
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:rgba(255,255,255,.02)
+    }
+    .mini-label{
+      font-size:11px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em
+    }
+    .mini-value{
+      font-size:18px;
+      font-weight:750;
+      margin-top:4px
+    }
+
     @media (max-width: 900px){
-      .wrap{padding:14px;gap:12px}
+      .wrap{padding:14px 16px;gap:10px}
       .time{font-size:58px}
       .temp{font-size:46px}
-      .card{padding:15px;border-radius:17px}
-      .today-grid{gap:8px}
-      .daybox{padding:10px}
-      .what,.task{font-size:16px}
+      .date{font-size:19px}
+      .cond{font-size:17px}
+      .card{padding:13px;border-radius:17px}
+      .forecast-grid{gap:7px}
+      .daybox{padding:9px}
+      .next-title{font-size:22px}
+      .countdown{font-size:32px}
     }
   </style>
 </head>
@@ -85,15 +236,24 @@
     <section class="left">
       <div class="card">
         <h2>4-Day Forecast</h2>
-        <div class="today-grid" id="forecast"></div>
+        <div class="forecast-grid" id="forecast"></div>
       </div>
 
       <div class="card">
         <h2>Today's Schedule</h2>
         <div class="agenda" id="agenda">
-          <div class="item"><div class="when">8:00 AM</div><div><div class="what">Work / Training</div><div class="sub">Edit this item in index.html</div></div></div>
-          <div class="item"><div class="when">2:45 PM</div><div><div class="what">Kids out of school</div><div class="sub">Example reminder</div></div></div>
-          <div class="item"><div class="when">4:30 PM</div><div><div class="what">Training ends</div><div class="sub">Example reminder</div></div></div>
+          <div class="item">
+            <div class="when">8:00 AM</div>
+            <div><div class="what">Work / Training</div><div class="sub">Replace with your actual schedule</div></div>
+          </div>
+          <div class="item">
+            <div class="when">2:45 PM</div>
+            <div><div class="what">Kids out of school</div><div class="sub">Example reminder</div></div>
+          </div>
+          <div class="item">
+            <div class="when">4:30 PM</div>
+            <div><div class="what">Training ends</div><div class="sub">Example reminder</div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -105,32 +265,28 @@
           <div class="task"><span class="box"></span><span>Call contractor</span></div>
           <div class="task"><span class="box"></span><span>Reserve paperwork</span></div>
           <div class="task"><span class="box"></span><span>Workout</span></div>
-          <div class="task"><span class="box"></span><span>Update dashboard tasks</span></div>
+          <div class="task"><span class="box"></span><span>Customize dashboard</span></div>
         </div>
       </div>
 
       <div class="card">
-        <h2>Dashboard Status</h2>
-        <div class="status">
-          <div class="statusbox">
-            <div class="statuslabel">Weather</div>
-            <div class="statusvalue" id="weatherStatus">Connecting</div>
-            <div class="small">Open-Meteo • no API key</div>
+        <h2>Up Next</h2>
+        <div class="upnext">
+          <div class="next-main">
+            <div class="eyebrow">Next event</div>
+            <div class="next-title" id="nextTitle">Kids out of school</div>
+            <div class="next-meta" id="nextMeta">2:45 PM today</div>
+            <div class="countdown" id="countdown">--</div>
           </div>
-          <div class="statusbox">
-            <div class="statuslabel">Last Update</div>
-            <div class="statusvalue" id="lastUpdate">--</div>
-            <div class="small">Refreshes every 20 minutes</div>
-          </div>
-          <div class="statusbox">
-            <div class="statuslabel">Mode</div>
-            <div class="statusvalue">Desk</div>
-            <div class="small">Landscape • dark theme</div>
-          </div>
-          <div class="statusbox">
-            <div class="statuslabel">Privacy</div>
-            <div class="statusvalue">Local</div>
-            <div class="small">No Google account required</div>
+          <div class="mini-grid">
+            <div class="mini">
+              <div class="mini-label">Weather refresh</div>
+              <div class="mini-value" id="lastUpdate">--</div>
+            </div>
+            <div class="mini">
+              <div class="mini-label">Dashboard</div>
+              <div class="mini-value">Online</div>
+            </div>
           </div>
         </div>
       </div>
@@ -142,6 +298,22 @@ const LAT = 41.8781;
 const LON = -87.6298;
 const TZ = 'America/Chicago';
 
+// EDIT THESE EXAMPLE EVENTS.
+const EVENTS = [
+  { time: '08:00', title: 'Work / Training' },
+  { time: '14:45', title: 'Kids out of school' },
+  { time: '16:30', title: 'Training ends' }
+];
+
+function chicagoNowParts(){
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat('en-CA',{
+    timeZone:TZ, year:'numeric',month:'2-digit',day:'2-digit',
+    hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false
+  }).formatToParts(now).reduce((a,p)=>(a[p.type]=p.value,a),{});
+  return parts;
+}
+
 function updateClock(){
   const now = new Date();
   document.getElementById('time').textContent = new Intl.DateTimeFormat('en-US',{
@@ -152,6 +324,39 @@ function updateClock(){
   }).format(now);
 }
 setInterval(updateClock,1000); updateClock();
+
+function getTodayEventDate(time){
+  const p = chicagoNowParts();
+  return new Date(`${p.year}-${p.month}-${p.day}T${time}:00-05:00`);
+}
+
+function updateNextEvent(){
+  const now = new Date();
+  let upcoming = EVENTS
+    .map(e => ({...e, dt:getTodayEventDate(e.time)}))
+    .filter(e => e.dt > now)
+    .sort((a,b)=>a.dt-b.dt)[0];
+
+  if(!upcoming){
+    document.getElementById('nextTitle').textContent='No more scheduled items';
+    document.getElementById('nextMeta').textContent='Enjoy the rest of your day';
+    document.getElementById('countdown').textContent='Done';
+    return;
+  }
+
+  document.getElementById('nextTitle').textContent=upcoming.title;
+  document.getElementById('nextMeta').textContent = new Intl.DateTimeFormat('en-US',{
+    hour:'numeric',minute:'2-digit',hour12:true,timeZone:TZ
+  }).format(upcoming.dt) + ' today';
+
+  let ms = upcoming.dt - now;
+  let mins = Math.max(0,Math.floor(ms/60000));
+  const hrs = Math.floor(mins/60);
+  mins = mins%60;
+  document.getElementById('countdown').textContent =
+    hrs > 0 ? `in ${hrs}h ${mins}m` : `in ${mins}m`;
+}
+setInterval(updateNextEvent,30000); updateNextEvent();
 
 function codeToWeather(code){
   if(code === 0) return ['Clear','☀️'];
@@ -166,7 +371,6 @@ function codeToWeather(code){
 }
 
 async function loadWeather(){
-  const status = document.getElementById('weatherStatus');
   try{
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,apparent_temperature,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=${encodeURIComponent(TZ)}&forecast_days=4`;
     const r = await fetch(url,{cache:'no-store'});
@@ -175,8 +379,9 @@ async function loadWeather(){
     const [label] = codeToWeather(d.current.weather_code);
     document.getElementById('temp').textContent = `${Math.round(d.current.temperature_2m)}°`;
     document.getElementById('cond').textContent = `${label} • Feels ${Math.round(d.current.apparent_temperature)}°`;
+
     const f = document.getElementById('forecast');
-    f.innerHTML = '';
+    f.innerHTML='';
     d.daily.time.forEach((date,i)=>{
       const [text,icon] = codeToWeather(d.daily.weather_code[i]);
       const name = new Intl.DateTimeFormat('en-US',{weekday:'short',timeZone:TZ}).format(new Date(date+'T12:00:00'));
@@ -189,12 +394,11 @@ async function loadWeather(){
           <div class="detail">${d.daily.precipitation_probability_max[i] ?? 0}% precip.</div>
         </div>`);
     });
-    status.textContent='Online';
-    status.classList.remove('error');
-    document.getElementById('lastUpdate').textContent = new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:TZ}).format(new Date());
+
+    document.getElementById('lastUpdate').textContent = new Intl.DateTimeFormat('en-US',{
+      hour:'numeric',minute:'2-digit',hour12:true,timeZone:TZ
+    }).format(new Date());
   }catch(e){
-    status.textContent='Offline';
-    status.classList.add('error');
     document.getElementById('cond').textContent='Weather unavailable';
   }
 }
